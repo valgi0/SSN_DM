@@ -10,7 +10,7 @@ import rouge
 import numpy as np
 from transformers import (BertModel, BertTokenizer, AutoConfig)
 from utils import check_nan
-from mlx_studio.storage import hdfs
+#from mlx_studio.storage import hdfs
 from tqdm import tqdm
 
 # hdfs.upload("result.txt", output_dir)
@@ -205,7 +205,7 @@ def train_model(args):
         model.state_dict(),
         model_save_path
     )
-    hdfs.upload(model_save_path, args.upload_dir)
+    #hdfs.upload(model_save_path, args.upload_dir)
         
 
 
