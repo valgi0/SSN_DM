@@ -127,7 +127,7 @@ def train_model(args):
         print('total batch_cnt {}'.format(batch_cnt))
         for batch_idx, batch_data in enumerate(train_data_loader):
             if batch_idx == 20:
-                exit(1)
+               break
             batch_cls_cnt = 0
             batch_train_loss = 0
             # print(batch_data['doc_ids'])
