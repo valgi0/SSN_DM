@@ -418,4 +418,7 @@ if __name__ == '__main__':
         train_model(args)
     elif args.mode == 'test':
         test_model(args)
+    elif args.mode == 'both':
+        train_model(args)
+        test_model(args)
 
