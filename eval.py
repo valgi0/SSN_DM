@@ -136,7 +136,7 @@ def eval_model(src_dir, label_dir, output_dir, ref_dir):
     print('accuracy is {}'.format(accuracy))
 
 
-output_dir = '/content/pubmed_test' # 'output/arXiv_test'
+output_dir = '/content/output/pubmed/' # 'output/arXiv_test'
 src_dir = '/content/pubmed/inputs/test' # 'output/arXiv_test'
 label_dir = '/content/pubmed/labels/test' # 'output/arXiv_test'
 ref_dir = '/content/pubmed/human-abstract/test' # 'output/arXiv_test
