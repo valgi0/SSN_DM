@@ -130,7 +130,11 @@ def train_model(args):
                break
             batch_cls_cnt = 0
             batch_train_loss = 0
-            # print(batch_data['doc_ids'])
+            print('DEBUG in run.py at train_model')
+            print('Input shape')
+            print(batch_data['token_ids'].shape)
+            print('Label shape')
+            print(batch_data['token_labels'].shape)
             segment_position_ids = torch.chunk(batch_data['segment_ids'], args.max_seg_num, 1)
             segment_token_ids = torch.chunk(batch_data['token_ids'], args.max_seg_num, 1)
             segment_token_types = torch.chunk(batch_data['token_types'], args.max_seg_num, 1)
