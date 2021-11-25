@@ -197,12 +197,6 @@ def train_model(args):
     model_save_path = '{}model.pt'.format(args.save_path)
     print(f'Model will be saved at: {model_save_path}')
     torch.save(
-        # {
-        #     'epoch': stop_epoch+1,
-        #     'state_dict': model.state_dict(),
-        #     'train_loss': train_loss,
-        #     'val_loss': val_loss[:-1]
-        # },
         model.state_dict(),
         model_save_path
     )
@@ -283,7 +277,7 @@ def test_model(args):
     print('load test data over, {} instacnes in total'.format(len(data_test)))
     test_dataloader = DataLoader(data_test, batch_size=1)
     model = SSNDM(args)
-    model_path = '{}_{}'.format(args.save_path, args.dataset)
+    model_path = '{}model.pt'.format(args.save_path)
     model.load_state_dict(torch.load(model_path))
     model = model.cuda()
     model.eval()
