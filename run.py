@@ -126,7 +126,7 @@ def train_model(args):
         batch_cnt = len(data_train) // parallel_batch_size
         print('total batch_cnt {}'.format(batch_cnt))
         for batch_idx, batch_data in enumerate(train_data_loader):
-            if batch_idx == 2:
+            if batch_idx == args.train_limit:
                break
             batch_cls_cnt = 0
             batch_train_loss = 0
@@ -375,6 +375,7 @@ if __name__ == '__main__':
     parser.add_argument("--warmup_steps_bert", default=8000, type=int)
     parser.add_argument("--warmup_steps_dec", default=8000, type=int)
     parser.add_argument("--test_limit", default=20, type=int)
+    parser.add_argument("--train_limit", default=20, type=int)
     parser.add_argument("--max_grad_norm", default=0, type=float)
 
     # corpus

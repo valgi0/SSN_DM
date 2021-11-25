@@ -9,15 +9,15 @@ def compute_oracle():
     oracle_rouge_2 = 0
     oracle_rouge_l = 0
 
-    file_list = os.listdir('./dataset/inputs')
+    file_list = os.listdir('/content/pubmed/inputs/test/')
     file_list = [file_name.split('.')[0] for file_name in file_list]
     
     for file_name in file_list:
-        with open(os.path.join('dataset/inputs', file_name+'.json')) as fp:
+        with open(os.path.join('/content/pubmed/inputs/test/', file_name+'.json')) as fp:
             doc = json.loads(fp.readlines()[0])
-        with open(os.path.join('dataset/labels', file_name+'.json')) as fp:
+        with open(os.path.join('/content/pubmed/inputs/labels', file_name+'.json')) as fp:
             labels = json.loads(fp.readlines()[0])['labels']
-        with open(os.path.join('dataset/references', file_name+'.txt')) as fp:
+        with open(os.path.join('/content/pubmed/human-abstracts/test/', file_name+'.txt')) as fp:
             ref = fp.readlines()[0]
         
         golden_sentences = []
@@ -139,7 +139,7 @@ def eval_model(src_dir, label_dir, output_dir, ref_dir):
 output_dir = '/content/pubmed_test' # 'output/arXiv_test'
 src_dir = '/content/pubmed/inputs/test' # 'output/arXiv_test'
 label_dir = '/content/pubmed/labels/test' # 'output/arXiv_test'
-ref_dir = '/content/pubmed/references/test' # 'output/arXiv_test
+ref_dir = '/content/pubmed/human-abstract/test' # 'output/arXiv_test
 
 
 if __name__ == '__main__':
