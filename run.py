@@ -163,11 +163,11 @@ def train_model(args):
                 memories.append(memory.cuda()) # to(device))
                 sentence_lables = torch.masked_select(segment_token_labels[segment_id].cuda(), segment_label_indices[segment_id].cuda())
                 
-            loss = criterion(sent_scores, sentence_lables.float())
-            # print('sent_scores: {}'.format(sent_scores))
-            # print('lables: {}'.format(sentence_lables.float()))
-            # print('loss: {}'.format(loss))
-            loss.backward()
+                loss = criterion(sent_scores, sentence_lables.float())
+                # print('sent_scores: {}'.format(sent_scores))
+                # print('lables: {}'.format(sentence_lables.float()))
+                # print('loss: {}'.format(loss))
+                loss.backward()
 
             epoch_train_loss += loss.float().item()
             batch_train_loss += loss.float().item()
@@ -260,23 +260,23 @@ def test_model(args):
     assert args.dataset in ['pubmed', 'arXiv']
     if args.dataset == 'pubmed':
         data_test = SciSumDataset(
-            inputs_dir = config['Path']['pubmed_test_inputs_dir'], 
-            labels_dir = config['Path']['pubmed_test_labels_dir'],
-            references_dir = config['Path']['pubmed_test_references_dir'],
+            inputs_dir = args.pubmed_test_inputs_dir,
+            labels_dir = args.pubmed_test_labels_dir,
+            references_dir = args.pubmed_test_references_dir,
             name_ = 'pubmed',
             mode = 'test',
-            max_seg_num=config['Setting'].getint('MAX_SEG_NUM'), 
-            max_seg_len=config['Setting'].getint('MAX_SEG_LEN')
+            max_seg_num=args.max_seg_len,
+            max_seg_len=args.max_seg_len,
         )
     else:
         data_test = SciSumDataset(
-            inputs_dir = config['Path']['arXiv_test_inputs_dir'], 
-            labels_dir = config['Path']['arXiv_test_labels_dir'],
-            references_dir = config['Path']['arXiv_test_references_dir'],
+            inputs_dir = args.arXiv_test_inputs_dir,
+            labels_dir = args.arXiv_test_labels_dir,
+            references_dir = args.arXiv_test_references_dir,
             name_ = 'arXiv',
             mode = 'test',
-            max_seg_num=config['Setting'].getint('MAX_SEG_NUM'), 
-            max_seg_len=config['Setting'].getint('MAX_SEG_LEN')
+            max_seg_num=args.max_seg_len,
+            max_seg_len=args.max_seg_len
         )
 
     print('load test data over, {} instacnes in total'.format(len(data_test)))
@@ -289,14 +289,14 @@ def test_model(args):
 
 
     for batch_idx, batch_data in tqdm(enumerate(test_dataloader)):
-        segment_position_ids = torch.chunk(batch_data['segment_ids'], config['Setting'].getint('MAX_SEG_NUM'), 1)
-        segment_token_ids = torch.chunk(batch_data['token_ids'], config['Setting'].getint('MAX_SEG_NUM'), 1)
-        segment_token_types = torch.chunk(batch_data['token_types'], config['Setting'].getint('MAX_SEG_NUM'), 1)
-        segment_token_position_ids = torch.chunk(batch_data['position_ids'], config['Setting'].getint('MAX_SEG_NUM'), 1)
-        segment_attention_mask = torch.chunk(batch_data['attention_mask'], config['Setting'].getint('MAX_SEG_NUM'), 1)
-        segment_token_section_ids = torch.chunk(batch_data['token_section_ids'], config['Setting'].getint('MAX_SEG_NUM'), 1)
-        segment_token_labels = torch.chunk(batch_data['token_labels'], config['Setting'].getint('MAX_SEG_NUM'), 1)
-        segment_label_indices = torch.chunk(batch_data['label_indices'], config['Setting'].getint('MAX_SEG_NUM'), 1)
+        segment_position_ids = torch.chunk(batch_data['segment_ids'], args.max_seg_len, 1)
+        segment_token_ids = torch.chunk(batch_data['token_ids'], args.max_seg_len, 1)
+        segment_token_types = torch.chunk(batch_data['token_types'], args.max_seg_len, 1)
+        segment_token_position_ids = torch.chunk(batch_data['position_ids'], args.max_seg_len, 1)
+        segment_attention_mask = torch.chunk(batch_data['attention_mask'], args.max_seg_len, 1)
+        segment_token_section_ids = torch.chunk(batch_data['token_section_ids'], args.max_seg_len, 1)
+        segment_token_labels = torch.chunk(batch_data['token_labels'], args.max_seg_len, 1)
+        segment_label_indices = torch.chunk(batch_data['label_indices'], args.max_seg_len, 1)
 
         memories = [None, ]
         batch_result = []
