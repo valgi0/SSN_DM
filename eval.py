@@ -139,7 +139,7 @@ def eval_model(src_dir, label_dir, output_dir, ref_dir):
 output_dir = '/content/output/pubmed/' # 'output/arXiv_test'
 src_dir = '/content/pubmed/inputs/test' # 'output/arXiv_test'
 label_dir = '/content/pubmed/labels/test' # 'output/arXiv_test'
-ref_dir = '/content/pubmed/human-abstract/test' # 'output/arXiv_test
+ref_dir = '/content/pubmed/human-abstracts/test' # 'output/arXiv_test
 
 
 if __name__ == '__main__':
