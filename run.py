@@ -126,7 +126,7 @@ def train_model(args):
         batch_cnt = len(data_train) // parallel_batch_size
         print('total batch_cnt {}'.format(batch_cnt))
         for batch_idx, batch_data in enumerate(train_data_loader):
-            if batch_idx == 20:
+            if batch_idx == 2:
                break
             batch_cls_cnt = 0
             batch_train_loss = 0
@@ -194,7 +194,7 @@ def train_model(args):
 
         # exit(1)
 
-    model_save_path = '{}_{}'.format(args.save_path, args.dataset)
+    model_save_path = '{}model.pt'.format(args.save_path)
     print(f'Model will be saved at: {model_save_path}')
     torch.save(
         # {
