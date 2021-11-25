@@ -323,13 +323,15 @@ def test_model(args):
             'logits': batch_result,
             'rank': rank
         }
+        with open(os.path.join(args.output_dir, batch_data['doc_ids'][0][0]+'.json'), 'w') as fp:
+            fp.write(json.dumps(json_result))
         if batch_idx % 5 == 0:
             print('predicted {} instances'.format(batch_idx))
         if batch_idx == args.test_limit:
             print('predicted {} instances'.format(batch_idx))
             print('Exit test')
-        with open(os.path.join(args.output_dir, batch_data['doc_ids'][0][0]+'.json'), 'w') as fp:
-            fp.write(json.dumps(json_result))
+            break
+
 
 
 
