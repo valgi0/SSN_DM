@@ -195,6 +195,7 @@ def train_model(args):
         # exit(1)
 
     model_save_path = '{}_{}'.format(args.save_path, args.dataset)
+    print(f'Model will be saved at: {model_save_path}')
     torch.save(
         # {
         #     'epoch': stop_epoch+1,
