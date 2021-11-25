@@ -40,8 +40,8 @@ def compute_oracle():
 
 def eval_model(src_dir, label_dir, output_dir, ref_dir):
 
-    def get_index(logits, k=6, theshord=-1):
-        sorted_indices = sorted(range(len(s)), key=lambda k: s[k])
+    def get_index(logits, k=6, threshold=-1):
+        sorted_indices = sorted(range(len(logits)), key=lambda k: logits[k])
         n_1 = k
         n_2 = len(logits)
         for i in range(len(sorted_indices)):
@@ -136,10 +136,10 @@ def eval_model(src_dir, label_dir, output_dir, ref_dir):
     print('accuracy is {}'.format(accuracy))
 
 
-output_dir = 'output/pubmed_test' # 'output/arXiv_test' 
-src_dir = 'dataset/pubmed/inputs/test' # 'output/arXiv_test' 
-label_dir = 'dataset/pubmed/labels/test' # 'output/arXiv_test' 
-ref_dir = 'dataset/pubmed/references/test' # 'output/arXiv_test
+output_dir = '/content/pubmed_test' # 'output/arXiv_test'
+src_dir = '/content/pubmed/inputs/test' # 'output/arXiv_test'
+label_dir = '/content/pubmed/labels/test' # 'output/arXiv_test'
+ref_dir = '/content/pubmed/references/test' # 'output/arXiv_test
 
 
 if __name__ == '__main__':

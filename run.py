@@ -323,8 +323,11 @@ def test_model(args):
             'logits': batch_result,
             'rank': rank
         }
-        if batch_idx % 100 == 0:
+        if batch_idx % 5 == 0:
             print('predicted {} instances'.format(batch_idx))
+        if batch_idx % args.test_limit == 0:
+            print('predicted {} instances'.format(batch_idx))
+            print('Exit test')
         with open(os.path.join(args.output_dir, batch_data['doc_ids'][0][0]+'.json'), 'w') as fp:
             fp.write(json.dumps(json_result))
 
@@ -371,6 +374,7 @@ if __name__ == '__main__':
     parser.add_argument("--warmup_steps", default=8000, type=int)
     parser.add_argument("--warmup_steps_bert", default=8000, type=int)
     parser.add_argument("--warmup_steps_dec", default=8000, type=int)
+    parser.add_argument("--test_limit", default=20, type=int)
     parser.add_argument("--max_grad_norm", default=0, type=float)
 
     # corpus
