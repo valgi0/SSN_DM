@@ -163,14 +163,14 @@ def train_model(args):
                 memories.append(memory.cuda()) # to(device))
                 sentence_lables = torch.masked_select(segment_token_labels[segment_id].cuda(), segment_label_indices[segment_id].cuda())
                 
-                loss = criterion(sent_scores, sentence_lables.float())
-                # print('sent_scores: {}'.format(sent_scores))
-                # print('lables: {}'.format(sentence_lables.float()))
-                # print('loss: {}'.format(loss))
-                loss.backward()
-                
-                epoch_train_loss += loss.float().item()
-                batch_train_loss += loss.float().item()
+            loss = criterion(sent_scores, sentence_lables.float())
+            # print('sent_scores: {}'.format(sent_scores))
+            # print('lables: {}'.format(sentence_lables.float()))
+            # print('loss: {}'.format(loss))
+            loss.backward()
+
+            epoch_train_loss += loss.float().item()
+            batch_train_loss += loss.float().item()
 
             optimizer.step()
             batch_average_loss = batch_train_loss / batch_cls_cnt # token-level
