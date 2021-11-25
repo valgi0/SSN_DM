@@ -168,7 +168,8 @@ def train_model(args):
                 )
                 memories.append(memory.cuda()) # to(device))
                 sentence_lables = torch.masked_select(segment_token_labels[segment_id].cuda(), segment_label_indices[segment_id].cuda())
-                
+                print('DEBUG in run.py at train_model')
+                print(sentence_lables)
                 loss = criterion(sent_scores, sentence_lables.float())
                 # print('sent_scores: {}'.format(sent_scores))
                 # print('lables: {}'.format(sentence_lables.float()))
